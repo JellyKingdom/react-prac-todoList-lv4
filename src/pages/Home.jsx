@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/ui/Header";
 import Layout from "../components/ui/Layout";
-import List from "../features/todos/components/List";
+import List from "../features/notes/components/List";
 
 
 
