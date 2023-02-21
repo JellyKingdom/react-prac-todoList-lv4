@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import api from "../../axios/api";
 
 const initialState = {
     notes: [],
@@ -13,7 +12,7 @@ export const __getNotes = createAsyncThunk(
     "getNotes",
     async (payload, thunkAPI) => {
         try {
-            const {data} = await api.get("/notes");
+            const {data} = await axios.get(`${process.env.REACT_APP_SERVER_URL}/notes`);
             return thunkAPI.fulfillWithValue(data);
         } catch (error) {
             console.log(error);
