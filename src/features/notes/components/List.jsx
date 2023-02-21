@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import api from "../../../axios/api";
-import { useDispatch, useSelector } from "react-redux";
-import { __getNotes } from "../../../redux/modules/notesSlice";
 
+import { useNavigate, Link } from "react-router-dom"
+import { __getNotes } from "../../../redux/modules/notesSlice";
+import { getNotes } from "../../../api/notes";
+import {useQuery} from "react-query";
 
 function List() {
-    const dispatch = useDispatch();
-    const {isLoading, error, notes} = useSelector((state) => {
-        return state.notes;
-    })
 
-
-    useEffect(()=>{
-        dispatch(__getNotes());
-    },[]);
 
     const navigate = useNavigate();
+
+
+    const {isLoading, isError, data } = useQuery("/notes", getNotes);
+
+
+    if(isLoading){
+        return <h1>로딩중입니다!</h1>;
+    }
+
+    if(isError){
+        return <h1>에러가 발생했습니다.</h1>
+    }
 
 
     // const onDeleteButtonHandler = async (id) => {
@@ -27,12 +29,6 @@ function List() {
     //     }))
     // }
 
-
-    // useEffect(()=>{
-    //     //db로부터 값 가져오기
-    //     fetchNotes();
-    // },[]);
-
     return(
         <>
             <button onClick={()=>{
@@ -40,7 +36,7 @@ function List() {
             }}>추가하기</button>
             <div>
             {
-                notes?.map((item) => {
+                data.map((item) => {
                     return (
                         <div key={item.id}>
                             <Link to={`notes/${item.id}`}>
