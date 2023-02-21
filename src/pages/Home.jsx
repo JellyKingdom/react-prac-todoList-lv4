@@ -7,10 +7,9 @@ import List from "../features/notes/components/List";
 
 const Home = () => {
     return(
-        <Layout>
-            <Header />
+
             <List />
-        </Layout>
+
     );
 };
 
