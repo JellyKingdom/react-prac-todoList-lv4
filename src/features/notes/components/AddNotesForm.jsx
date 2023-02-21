@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import api from "../../../axios/api";
 import axios from "axios";
 
 function AddNotesForm() {
@@ -18,7 +19,7 @@ function AddNotesForm() {
             return alert("모든 항목을 입력해주세요.");
         }
 
-        axios.post("http://localhost:4000/notes", note);
+        api.post("notes", note);
         setNote({ title: "", content: "", username: "" });
     };
 

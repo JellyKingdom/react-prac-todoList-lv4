@@ -1,31 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import api from "../../../axios/api";
+import { useDispatch, useSelector } from "react-redux";
+import { __getNotes } from "../../../redux/modules/notesSlice";
 
 
 
 function List() {
-    const [notes, setNotes] = useState(null);
-
-    const navigate = useNavigate();
-    
-    const fetchNotes = async () => {
-        const {data} = await axios.get('http://localhost:4000/notes/');
-        setNotes(data);
-
-    }
-
-    const onDeleteButtonHandler = async (id) => {
-        axios.delete(`http://localhost:4000/notes/${id}`);
-        setNotes(notes.filter((item) => {
-            return item.id !== id;
-        }))
-    }
+    const dispatch = useDispatch();
+    const {isLoading, error, notes} = useSelector((state) => {
+        return state.notes;
+    })
+    // const { isLoading, error, notes } = useSelector((state) => {
+    //     return state.notes;
+    // });
 
     useEffect(()=>{
-        //db로부터 값 가져오기
-        fetchNotes();
+        dispatch(__getNotes());
     },[]);
+
+    const navigate = useNavigate();
+
+
+    // const [notes, setNotes] = useState(null);
+    
+    // const fetchNotes = async () => {
+    //     const {data} = await api.get('/notes');
+    //     setNotes(data);
+    // }
+
+
+    // const onDeleteButtonHandler = async (id) => {
+    //     api.delete(`notes/${id}`);
+    //     setNotes(notes.filter((item) => {
+    //         return item.id !== id;
+    //     }))
+    // }
+
+
+    // useEffect(()=>{
+    //     //db로부터 값 가져오기
+    //     fetchNotes();
+    // },[]);
+
     return(
         <>
             <button onClick={()=>{
@@ -41,7 +59,7 @@ function List() {
                             </Link>
                             
                             &nbsp;
-                            <button onClick={()=>{onDeleteButtonHandler(item.id)}}>삭제</button>
+                            {/* <button onClick={()=>{onDeleteButtonHandler(item.id)}}>삭제</button> */}
                         </div>
                     )
                 })
