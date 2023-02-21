@@ -1,48 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import api from "../../../axios/api";
-import { useDispatch, useSelector } from "react-redux";
-import { __getNotes } from "../../../redux/modules/notesSlice";
 
-
+import { useNavigate, Link } from "react-router-dom"
+import { deleteNotes, getNotes } from "../../../api/notes";
+import {useQuery} from "react-query";
+import {useQueryClient} from "react-query";
+import {useMutation} from "react-query";
 
 function List() {
-    const dispatch = useDispatch();
-    const {isLoading, error, notes} = useSelector((state) => {
-        return state.notes;
-    })
-    // const { isLoading, error, notes } = useSelector((state) => {
-    //     return state.notes;
-    // });
 
-    useEffect(()=>{
-        dispatch(__getNotes());
-    },[]);
-
+    //리액트 쿼리 관련 코드
+    const queryClient = useQueryClient();
+    const mutation = useMutation(deleteNotes, {
+        onSuccess: () => {
+            queryClient.invalidateQueries("notes");
+            console.log('성공하였습니다!');
+        }
+    });
     const navigate = useNavigate();
 
-
-    // const [notes, setNotes] = useState(null);
-    
-    // const fetchNotes = async () => {
-    //     const {data} = await api.get('/notes');
-    //     setNotes(data);
-    // }
+    const {isLoading, isError, data } = useQuery("notes", getNotes);
 
 
-    // const onDeleteButtonHandler = async (id) => {
-    //     api.delete(`notes/${id}`);
-    //     setNotes(notes.filter((item) => {
-    //         return item.id !== id;
-    //     }))
-    // }
+    if(isLoading){
+        return <h1>로딩중입니다!</h1>;
+    }
+
+    if(isError){
+        return <h1>에러가 발생했습니다.</h1>
+    }
 
 
-    // useEffect(()=>{
-    //     //db로부터 값 가져오기
-    //     fetchNotes();
-    // },[]);
+    const onDeleteButtonHandler = async (id) => {
+        mutation.mutate(id);
+    }
 
     return(
         <>
@@ -51,7 +40,7 @@ function List() {
             }}>추가하기</button>
             <div>
             {
-                notes?.map((item) => {
+                data.map((item) => {
                     return (
                         <div key={item.id}>
                             <Link to={`notes/${item.id}`}>
@@ -59,7 +48,7 @@ function List() {
                             </Link>
                             
                             &nbsp;
-                            {/* <button onClick={()=>{onDeleteButtonHandler(item.id)}}>삭제</button> */}
+                            <button onClick={()=>{onDeleteButtonHandler(item.id)}}>삭제</button>
                         </div>
                     )
                 })
