@@ -13,4 +13,10 @@ const addNotes = async (newNotes) => {
     await axios.post(`${process.env.REACT_APP_SERVER_URL}/notes`, newNotes);
 }
 
-export {getNotes, addNotes};
+// 삭제
+
+const deleteNotes = async (id) => {
+    await axios.delete(`${process.env.REACT_APP_SERVER_URL}/notes/${id}`);
+}
+
+export {getNotes, addNotes, deleteNotes};

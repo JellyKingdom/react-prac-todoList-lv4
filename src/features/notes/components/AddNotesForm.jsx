@@ -9,7 +9,7 @@ function AddNotesForm() {
     const queryClient = useQueryClient();
     const mutation = useMutation(addNotes, {
         onSuccess: () => {
-            queryClient.invalidateQueries("todos");
+            queryClient.invalidateQueries("notes");
             console.log('성공하였습니다!');
         }
     });
