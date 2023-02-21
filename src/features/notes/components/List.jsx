@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+
 
 
 function List() {
@@ -35,7 +36,10 @@ function List() {
                 notes?.map((item) => {
                     return (
                         <div key={item.id}>
+                            <Link to={`notes/${item.id}`}>
                             {item.id} : {item.title}
+                            </Link>
+                            
                             &nbsp;
                             <button onClick={()=>{onDeleteButtonHandler(item.id)}}>삭제</button>
                         </div>
