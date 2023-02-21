@@ -6,29 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getNotes } from "../../../redux/modules/notesSlice";
 
 
-
 function List() {
     const dispatch = useDispatch();
     const {isLoading, error, notes} = useSelector((state) => {
         return state.notes;
     })
-    // const { isLoading, error, notes } = useSelector((state) => {
-    //     return state.notes;
-    // });
+
 
     useEffect(()=>{
         dispatch(__getNotes());
     },[]);
 
     const navigate = useNavigate();
-
-
-    // const [notes, setNotes] = useState(null);
-    
-    // const fetchNotes = async () => {
-    //     const {data} = await api.get('/notes');
-    //     setNotes(data);
-    // }
 
 
     // const onDeleteButtonHandler = async (id) => {
