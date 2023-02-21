@@ -10,7 +10,7 @@ function List() {
     const navigate = useNavigate();
 
 
-    const {isLoading, isError, data } = useQuery("/notes", getNotes);
+    const {isLoading, isError, data } = useQuery("notes", getNotes);
 
 
     if(isLoading){

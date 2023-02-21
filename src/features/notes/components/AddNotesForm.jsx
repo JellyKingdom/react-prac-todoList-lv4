@@ -1,8 +1,19 @@
 import React, { useState } from "react";
-import api from "../../../axios/api";
-import axios from "axios";
+import { addNotes } from "../../../api/notes";
+import {useQueryClient} from "react-query";
+import {useMutation} from "react-query";
 
 function AddNotesForm() {
+
+    //리액트 쿼리 관련 코드
+    const queryClient = useQueryClient();
+    const mutation = useMutation(addNotes, {
+        onSuccess: () => {
+            queryClient.invalidateQueries("todos");
+            console.log('성공하였습니다!');
+        }
+    });
+
     const [note, setNote] = useState({
         title: "",
         content: "",
@@ -19,7 +30,9 @@ function AddNotesForm() {
             return alert("모든 항목을 입력해주세요.");
         }
 
-        api.post("notes", note);
+        // api.post("notes", note);
+        mutation.mutate(note);
+
         setNote({ title: "", content: "", username: "" });
     };
 

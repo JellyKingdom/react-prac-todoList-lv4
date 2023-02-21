@@ -8,4 +8,9 @@ const getNotes = async () => {
     return response.data;
 }
 
-export {getNotes};
+// 추가
+const addNotes = async (newNotes) => {
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/notes`, newNotes);
+}
+
+export {getNotes, addNotes};
