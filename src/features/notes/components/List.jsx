@@ -1,6 +1,5 @@
 
 import { useNavigate, Link } from "react-router-dom"
-import { __getNotes } from "../../../redux/modules/notesSlice";
 import { deleteNotes, getNotes } from "../../../api/notes";
 import {useQuery} from "react-query";
 import {useQueryClient} from "react-query";

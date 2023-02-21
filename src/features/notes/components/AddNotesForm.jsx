@@ -36,6 +36,7 @@ function AddNotesForm() {
         setNote({ title: "", content: "", username: "" });
     };
 
+    console.log(note);
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
         setNote({
