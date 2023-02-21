@@ -10,10 +10,17 @@ function List() {
     
     const fetchNotes = async () => {
         const {data} = await axios.get('http://localhost:4000/notes/');
-        console.log(data);
         setNotes(data);
 
     }
+
+    const onDeleteButtonHandler = async (id) => {
+        axios.delete(`http://localhost:4000/notes/${id}`);
+        setNotes(notes.filter((item) => {
+            return item.id !== id;
+        }))
+    }
+
     useEffect(()=>{
         //db로부터 값 가져오기
         fetchNotes();
@@ -29,6 +36,8 @@ function List() {
                     return (
                         <div key={item.id}>
                             {item.id} : {item.title}
+                            &nbsp;
+                            <button onClick={()=>{onDeleteButtonHandler(item.id)}}>삭제</button>
                         </div>
                     )
                 })
