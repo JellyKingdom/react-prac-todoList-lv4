@@ -1,12 +1,16 @@
-
-import Router from './shared/Router';
+import Layout from "./components/ui/Layout";
+import Router from "./shared/Router";
+import Header from "./components/ui/Header";
 
 function App() {
-  return (
-    <>
-      <Router/>
-    </>
-  );
+    return (
+        <>
+            <Layout>
+              <Header/>
+                <Router />
+            </Layout>
+        </>
+    );
 }
 
 export default App;
