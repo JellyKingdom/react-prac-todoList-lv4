@@ -13,9 +13,10 @@ export const __getTodos = createAsyncThunk(
     async (payload, thunkAPI) => {
         try {
             const {data} = await axios.get(`${process.env.REACT_APP_SERVER_URL}/todos`);
+            // console.log(data);
             return thunkAPI.fulfillWithValue(data);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -26,9 +27,11 @@ const todosSlice = createSlice({
     initialState,
     reducers: {
         updateAction: (state, action) => {
-            return state?.map((todo) =>
+            const test = state.todos.map((todo) =>
                 todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo
             );
+            // console.log(test);
+            state.todos = test;
         },
     },
     extraReducers: {
@@ -38,10 +41,10 @@ const todosSlice = createSlice({
             state.isError = false;
         },
         [__getTodos.fulfilled]:(state, action)=>{
-            // console.log('fullfilled : ', action)
+            // console.log('fullfilled : ',state, action)
             state.isLoading = false;
             state.isError = false;
-            state.Todos = action.payload;
+            state.todos = action.payload;
 
         },
         [__getTodos.rejected]:(state, action)=>{

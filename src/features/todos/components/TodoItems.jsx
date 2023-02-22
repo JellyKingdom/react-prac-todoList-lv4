@@ -1,44 +1,44 @@
 import Todo from "./Todo";
 import styled from "styled-components";
-import { useQuery } from "react-query";
-import {  getTodos } from "../../../api/todos";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { __getTodos } from "../../../redux/modules/todosSlice";
 
 
 const TodoItems = () => {
 
+    const dispatch = useDispatch();
 
-    const { isLoading, isError, data } = useQuery("todos", getTodos
-    );
+    const todos = useSelector((state) => {
+        return state.todos.todos;
+    });
 
-    if (isLoading) {
-        return <h1>로딩중입니다!</h1>;
-    }
 
-    if (isError) {
-        return <h1>에러가 발생했습니다.</h1>;
-    }
+    useEffect(() => {
+        dispatch(__getTodos());
 
+    }, [dispatch]);
 
 
     return (
         <TodoItemsBox>
             <Title>Working🔥</Title>
             <ItemWrapper>
-                {data && data.map((todo) => {
-                    if (!todo.isDone) {
-                        return (
-                            <Todo
-                                key={todo.id}
-                                todo={todo}
-                            />
-                        );
-                    }
+                {todos.map((todo) => {
+                        if (!todo.isDone) {
+                            return (
+                                <Todo
+                                    key={todo.id}
+                                    todo={todo}
+                                />
+                            );
+                        }
                 })}
             </ItemWrapper>
             <Title>Done💘</Title>
             <ItemWrapper>
-                {data && data.map((todo) => {
+                {todos.map((todo) => {
                     if (todo.isDone) {
                         return (
                             <Todo

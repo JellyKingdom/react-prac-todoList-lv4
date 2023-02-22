@@ -6,9 +6,18 @@ import { useMutation } from "react-query";
 import { deleteTodos, switchTodo } from "../../../api/todos";
 import { HiMinusCircle } from "react-icons/hi2";
 import Button from "../../../elem/Button";
-
+import { useSelector } from "react-redux";
+import { updateAction } from "../../../redux/modules/todosSlice";
+import { useDispatch } from "react-redux";
 const Todo = ({ todo }) => {
+    const dispatch = useDispatch();
+
     const navigate = useNavigate();
+
+    const updateTodos = (id) => {
+        dispatch(updateAction(id));
+    };
+
 
     //리액트 쿼리 관련 코드
     const queryClient = useQueryClient();
@@ -29,11 +38,14 @@ const Todo = ({ todo }) => {
     };
 
     const switchButtonHandler = () => {
+        
         const payload = {
             id: todo.id,
             isDone: !todo.isDone,
         };
         switchMutation.mutate(payload);
+        updateTodos(todo.id);
+
     };
 
     return (
