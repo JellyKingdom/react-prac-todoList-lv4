@@ -12,10 +12,6 @@ import { useDispatch } from "react-redux";
 const Todo = ({ todo }) => {
     const dispatch = useDispatch();
 
-    const todos = useSelector((state) => {
-        return state.todos.todos;
-    });
-
     const navigate = useNavigate();
 
     const updateTodos = (id) => {
