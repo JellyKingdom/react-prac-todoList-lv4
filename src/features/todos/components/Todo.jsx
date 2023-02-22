@@ -5,6 +5,7 @@ import { useQueryClient } from "react-query";
 import { useMutation } from "react-query";
 import { deleteTodos, switchTodo } from "../../../api/todos";
 import { HiMinusCircle } from "react-icons/hi2";
+import Button from "../../../elem/Button";
 
 const Todo = ({ todo }) => {
     const navigate = useNavigate();
@@ -48,27 +49,24 @@ const Todo = ({ todo }) => {
                         삭제
                     </HiMinusCircle>
                 </IconWrap>
-                    <h2>{todo.title}</h2>
+                <h2>{todo.title}</h2>
                 <div>{todo.content}</div>
-            
             </div>
 
             <BtnsBox>
-                <Btn
-                    borderColor='red'
+                <Button
+                borderColor="#B66EB0"
                     onClick={() => {
                         navigate(`todos/${todo.id}`);
                     }}
                 >
                     수정
-                </Btn>
-                <Btn
-                    borderColor='green'
-                    className='doneBtn'
-                    onClick={switchButtonHandler}
-                >
+                </Button>
+                <Button 
+                borderColor="#2176BA"
+                onClick={switchButtonHandler}>
                     {todo.isDone ? "취소" : "완료"}
-                </Btn>
+                </Button>
             </BtnsBox>
         </TodoContainer>
     );
@@ -77,7 +75,7 @@ const Todo = ({ todo }) => {
 export default Todo;
 
 const TodoContainer = styled.div`
-    border: 4px solid teal;
+    border: 4px solid #2176BA;
     border-radius: 12px;
     padding: 12px 24px 24px;
     width: 270px;
@@ -89,15 +87,6 @@ const BtnsBox = styled.div`
     margin-top: 24px;
 `;
 
-const Btn = styled.button`
-    border-radius: 8px;
-    cursor: pointer;
-    height: 40px;
-    width: 50%;
-
-    background-color: #fff;
-    border: 2px solid ${(props) => props.borderColor};
-`;
 
 const IconWrap = styled.div`
     display: flex;

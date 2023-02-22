@@ -1,3 +1,4 @@
+import { border } from "@mui/system";
 import React from "react";
 import styled, { css } from "styled-components";
 import flex from "../lib/flex";
@@ -14,7 +15,7 @@ export default Button;
 
 const StButton = styled.button`
     ${flex({})};
-    border: 1px solid #eee;
+    border: 2px solid ${(props) => props.borderColor};
     background-color: #fff;
     height: 46px;
     border-radius: 8px;
@@ -44,4 +45,3 @@ const StButton = styled.button`
         }
     }}
 `;
-
