@@ -1,13 +1,10 @@
 import Todo from "./Todo";
 import styled from "styled-components";
-import { useQuery } from "react-query";
-import { getTodos, updateTodos } from "../../../api/todos";
+
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { __getTodos } from "../../../redux/modules/todosSlice";
-import { useQueryClient } from "react-query";
-import { useMutation } from "react-query";
-import { updateAction } from "../../../redux/modules/todosSlice";
+
 
 const TodoItems = () => {
 
