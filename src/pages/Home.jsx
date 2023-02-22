@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IoAddCircleSharp } from "react-icons/io5";
 import styled from "styled-components";
-import flex from "../lib/flex";
 import TodoItems from "../features/todos/components/TodoItems";
 
 const Home = () => {
@@ -19,7 +18,6 @@ const Home = () => {
                 </IconWrap>
             </div>
 
-            {/* <TodosList /> */}
             <TodoItems/>
         </>
     );

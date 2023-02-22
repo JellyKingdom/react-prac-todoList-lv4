@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Todo from "./Todo";
 import styled from "styled-components";
 import { useQuery } from "react-query";
