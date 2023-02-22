@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Todo from "./Todo";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import { useQuery } from "react-query";
 import {  getTodos } from "../../../api/todos";
 
+
+
 const TodoItems = () => {
 
-    // const todos = useSelector((state) => {
-    //     return state.todos;
-    // });
- 
-    const { isLoading, isError, data } = useQuery("todos", getTodos);
+
+    const { isLoading, isError, data } = useQuery("todos", getTodos
+    );
+
+    if (isLoading) {
+        return <h1>로딩중입니다!</h1>;
+    }
+
+    if (isError) {
+        return <h1>에러가 발생했습니다.</h1>;
+    }
+
+
 
     return (
         <TodoItemsBox>
-            <Title>Working</Title>
+            <Title>Working🔥</Title>
             <ItemWrapper>
-                {data?.map(function (todo) {
+                {data && data.map((todo) => {
                     if (!todo.isDone) {
                         return (
                             <Todo
@@ -28,9 +37,9 @@ const TodoItems = () => {
                     }
                 })}
             </ItemWrapper>
-            <Title>Done</Title>
+            <Title>Done💘</Title>
             <ItemWrapper>
-                {data?.map(function (todo) {
+                {data && data.map((todo) => {
                     if (todo.isDone) {
                         return (
                             <Todo

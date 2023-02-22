@@ -13,10 +13,10 @@ function App() {
         
             <QueryClientProvider client={queryClient}>
                 <GlobalStyle/>
-                <Layout>
-                    <Header />
+               
                     <Router />
-                </Layout>
+                
+             
                 
             </QueryClientProvider>
         </>

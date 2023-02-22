@@ -1,10 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { HiHome } from "react-icons/hi";
 
 const Header = () => {
+    const navigate = useNavigate();
+
     return (
         <StContainer>
-            <div>React-proj-lv4</div>
+            <HiHome 
+            size={"24px"}
+            cursor={"pointer"}
+            onClick={() => {
+                navigate("/");
+            }}>홈</HiHome>
             <div>React</div>
         </StContainer>
     );

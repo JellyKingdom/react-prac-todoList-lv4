@@ -48,14 +48,7 @@ const Todo = ({ todo }) => {
                         삭제
                     </HiMinusCircle>
                 </IconWrap>
-                <div
-                    style={{ cursor: "pointer" }}
-                    onClick={() => {
-                        navigate(`todos/${todo.id}`);
-                    }}
-                >
                     <h2>{todo.title}</h2>
-                </div>
                 <div>{todo.content}</div>
             
             </div>

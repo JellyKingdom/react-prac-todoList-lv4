@@ -1,5 +1,4 @@
 import React from "react";
-import TodosList from "../features/todos/components/TodoList";
 import { useNavigate } from "react-router-dom";
 import { IoAddCircleSharp } from "react-icons/io5";
 import styled from "styled-components";
