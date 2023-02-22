@@ -7,7 +7,7 @@ import { deleteTodos, switchTodo } from "../../../api/todos";
 import { HiMinusCircle } from "react-icons/hi2";
 import Button from "../../../elem/Button";
 import { useSelector } from "react-redux";
-import { updateAction } from "../../../redux/modules/todosSlice";
+import { updateAction, deleteAction } from "../../../redux/modules/todosSlice";
 import { useDispatch } from "react-redux";
 const Todo = ({ todo }) => {
     const dispatch = useDispatch();
@@ -18,6 +18,9 @@ const Todo = ({ todo }) => {
         dispatch(updateAction(id));
     };
 
+    const deleteTodos2 = (id) => {
+        dispatch(deleteAction(id));
+    };
 
     //리액트 쿼리 관련 코드
     const queryClient = useQueryClient();
@@ -35,17 +38,16 @@ const Todo = ({ todo }) => {
 
     const onDeleteButtonHandler = async (id) => {
         mutation.mutate(id);
+        deleteTodos2(todo.id);
     };
 
     const switchButtonHandler = () => {
-        
         const payload = {
             id: todo.id,
             isDone: !todo.isDone,
         };
         switchMutation.mutate(payload);
         updateTodos(todo.id);
-
     };
 
     return (
@@ -66,16 +68,14 @@ const Todo = ({ todo }) => {
 
             <BtnsBox>
                 <Button
-                borderColor="#B66EB0"
+                    borderColor='#B66EB0'
                     onClick={() => {
                         navigate(`todos/${todo.id}`);
                     }}
                 >
                     수정
                 </Button>
-                <Button 
-                borderColor="#2176BA"
-                onClick={switchButtonHandler}>
+                <Button borderColor='#2176BA' onClick={switchButtonHandler}>
                     {todo.isDone ? "취소" : "완료"}
                 </Button>
             </BtnsBox>
@@ -86,7 +86,7 @@ const Todo = ({ todo }) => {
 export default Todo;
 
 const TodoContainer = styled.div`
-    border: 4px solid #2176BA;
+    border: 4px solid #2176ba;
     border-radius: 12px;
     padding: 12px 24px 24px;
     width: 270px;
@@ -97,7 +97,6 @@ const BtnsBox = styled.div`
     gap: 10px;
     margin-top: 24px;
 `;
-
 
 const IconWrap = styled.div`
     display: flex;
