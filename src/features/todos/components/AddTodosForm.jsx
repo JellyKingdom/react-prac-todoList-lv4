@@ -15,7 +15,7 @@ function AddTodosForm() {
     const mutation = useMutation(addTodos, {
         onSuccess: () => {
             queryClient.invalidateQueries("todos");
-            console.log("성공하였습니다!");
+            // console.log("성공하였습니다!");
         },
     });
 

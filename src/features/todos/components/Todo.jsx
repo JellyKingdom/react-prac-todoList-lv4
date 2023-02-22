@@ -15,7 +15,6 @@ const Todo = ({ todo }) => {
     const mutation = useMutation(deleteTodos, {
         onSuccess: () => {
             queryClient.invalidateQueries("todos");
-            console.log("성공하였습니다!");
         },
     });
 
