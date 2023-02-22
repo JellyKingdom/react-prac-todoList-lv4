@@ -1,17 +1,22 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AddNotes from "../pages/AddNotes";
+import AddTodos from "../pages/AddTodos";
 import Home from "../pages/Home";
-import Note from "../pages/Note";
+import TodoDetail from "../pages/TodoDetail";
+import Header from "../components/ui/Header";
+import Layout from "../components/ui/Layout";
 
 const Router = () => {
-    return(
+    return (
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/notes/add" element={<AddNotes/>}/>
-                <Route path="/notes/:id" element={<Note />}/>
-            </Routes>
+            <Layout>
+                <Header />
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/todos/add' element={<AddTodos />} />
+                    <Route path='/todos/:id' element={<TodoDetail />} />
+                </Routes>
+            </Layout>
         </BrowserRouter>
     );
 };
