@@ -54,6 +54,7 @@ function Todo() {
         setEdit({ content: "" });
     };
 
+
     const buttonClickHandler = () => {
         navigate("/");
     };
@@ -63,7 +64,7 @@ function Todo() {
             <DetailsBox>
                 <div>
                     <IdBox>
-                        <div>ID: {data.id}</div>
+                        <div>ID: {data?.id}</div>
 
                         <Button onClick={buttonClickHandler}>이전으로</Button>
                     </IdBox>

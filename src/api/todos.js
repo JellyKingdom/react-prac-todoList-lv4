@@ -31,7 +31,7 @@ const deleteTodos = async (id) => {
 
 // 업데이트
 const updateTodos = async (edit) => {
-    await axios.put(
+    await axios.patch(
         `${process.env.REACT_APP_SERVER_URL}/todos/${edit.id}`,
         edit
     );
